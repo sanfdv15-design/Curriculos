@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sandra F. Della Valle · Dados & BI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper: #F1F2EE;
+    --surface: #FFFFFF;
+    --ink: #1A2430;
+    --muted: #5D6570;
+    --muted-2: #7B828C;
+    --navy: #1F4E79;
+    --teal: #2E7D6B;
+    --line: #DCDED8;
+    --line-strong: #C4C8C0;
+    --tag-bg: #EAF0F5;
+    --tag-ink: #1F4E79;
+    --focus: #2E7D6B;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12161F;
+      --surface: #171C27;
+      --ink: #E7E9E4;
+      --muted: #9AA3AE;
+      --muted-2: #7C8592;
+      --navy: #82B2DC;
+      --teal: #63BFA6;
+      --line: #2A3140;
+      --line-strong: #3A4356;
+      --tag-bg: #1D2A38;
+      --tag-ink: #9CCBEE;
+      --focus: #63BFA6;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #12161F;
+    --surface: #171C27;
+    --ink: #E7E9E4;
+    --muted: #9AA3AE;
+    --muted-2: #7C8592;
+    --navy: #82B2DC;
+    --teal: #63BFA6;
+    --line: #2A3140;
+    --line-strong: #3A4356;
+    --tag-bg: #1D2A38;
+    --tag-ink: #9CCBEE;
+    --focus: #63BFA6;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 64px) clamp(18px, 5vw, 28px) 80px;
+  }
+
+  header.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: clamp(22px, 4vw, 36px) clamp(20px, 5vw, 40px);
+  }
+
+  .name {
+    font-family: "Fraunces", Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(2rem, 5.2vw, 2.6rem);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+
+  .headline {
+    color: var(--navy);
+    font-weight: 600;
+    font-size: clamp(1rem, 2.6vw, 1.15rem);
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .contact a:hover,
+  .contact a:focus-visible {
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+
+  section { margin-top: 34px; }
+
+  h2.section-title {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .resumo {
+    max-width: 62ch;
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+
+  .role { margin-bottom: 26px; }
+  .role:last-child { margin-bottom: 0; }
+
+  .role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .role-title {
+    font-weight: 600;
+    font-size: 1.02rem;
+    text-wrap: balance;
+  }
+
+  .role-dates {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.78rem;
+    color: var(--muted-2);
+    white-space: nowrap;
+  }
+
+  .role-org {
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.86rem;
+    margin: 3px 0 10px;
+  }
+
+  .role-note {
+    font-size: 0.86rem;
+    font-style: italic;
+    color: var(--muted);
+    margin: -2px 0 10px;
+    padding-left: 12px;
+    border-left: 2px solid var(--line-strong);
+  }
+
+  ul.bullets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul.bullets li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+    font-size: 0.93rem;
+  }
+
+  ul.bullets li:last-child { margin-bottom: 0; }
+
+  ul.bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    background: var(--tag-bg);
+    color: var(--tag-ink);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  .edu { margin-bottom: 14px; }
+  .edu:last-child { margin-bottom: 0; }
+  .edu-school { font-weight: 600; font-size: 0.95rem; }
+  .edu-detail { color: var(--muted); font-size: 0.86rem; }
+
+  .lang { font-size: 0.93rem; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--muted-2);
+    letter-spacing: 0.02em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="card">
+    <h1 class="name">Sandra F. Della Valle</h1>
+    <p class="headline">Analista de Dados &amp; BI · Analytics · Power BI · SQL</p>
+    <div class="contact">
+      <span>São Caetano do Sul, SP</span>
+      <a href="mailto:sanfdv15@gmail.com">sanfdv15@gmail.com</a>
+      <a href="https://www.linkedin.com/in/sandradvalle" target="_blank" rel="noopener">linkedin.com/in/sandradvalle</a>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">Resumo</h2>
+    <p class="resumo">Profissional com mais de 4 anos de atuação dedicada a Análise de Dados e Business Intelligence, dentro de uma trajetória de 13 anos em tecnologia e projetos na mesma empresa. Experiência sólida em extração e modelagem de dados em SQL, construção de dashboards e painéis em Power BI, e desenvolvimento de KPIs que apoiam a tomada de decisão de clientes e áreas de negócio. Atuação também na estruturação da área de Ciência de Dados e BI da empresa e na condução de projetos de Data Warehouse/Data Lakehouse, sempre com foco em qualidade da informação, autonomia analítica e melhoria contínua.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Experiência Profissional</h2>
+
+    <div class="role">
+      <div class="role-row">
+        <span class="role-title">Coordenadora de Ciência de Dados / Tech Lead</span>
+        <span class="role-dates">ago/2025 – set/2026</span>
+      </div>
+      <p class="role-org">OM30 · São Paulo, Brasil</p>
+      <p class="role-note">Encerramento do vínculo em set/2026 em decorrência de reestruturação organizacional da empresa (redução da equipe de Ciência de Dados).</p>
+
+      <ul class="bullets">
+        <li>Participação, como líder, na estruturação da área de Ciência de Dados e BI da empresa, com definição de processos, indicadores e rotinas analíticas, e gestão direta de uma equipe de 3 pessoas.</li>
+        <li>Atuei como ponto focal entre a empresa terceira responsável pela engenharia do Data Lakehouse e as áreas de negócio, coordenando entregas, prioridades e cronograma do projeto (iniciado em 2024 e retomado há aproximadamente 1 ano), até a fase de refinamento, com os primeiros relatórios e dashboards já em produção apontando para a nova base.</li>
+        <li>Liderei e participei ativamente da migração de aproximadamente 400 relatórios do ambiente de produção legado para o novo Data Lakehouse, com atenção especial à adequação dos relatórios ao ambiente multi-tenant, etapa em andamento no momento do meu desligamento durante a reestruturação da empresa.</li>
+        <li>Definição de prioridades e acompanhamento de entregas de demandas de desenvolvimento de novos relatórios, suporte aos já existentes e migração para o Data Lakehouse, com base em metodologias ágeis.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-row">
+        <span class="role-title">Analista de Dados | Analista de BI</span>
+        <span class="role-dates">jan/2022 – jul/2025</span>
+      </div>
+      <p class="role-org">OM30 · São Paulo, Brasil</p>
+
+      <ul class="bullets">
+        <li>Extração de dados em SQL e construção de relatórios e dashboards/painéis em Power BI para as áreas de Educação Pública e Saúde Pública.</li>
+        <li>Entrega de mais de 300 dashboards operacionais e de gestão nas áreas de Saúde Pública, Educação Pública e GED (Gestão Eletrônica de Documentos).</li>
+        <li>Desenvolvimento de KPIs e relatórios que permitiram aos clientes identificar rapidamente oportunidades de correção e melhoria de processos.</li>
+        <li>Planejamento de sprints, organização, priorização e distribuição de tarefas de suporte e desenvolvimento.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-row">
+        <span class="role-title">Analista de Negócios</span>
+        <span class="role-dates">ago/2013 – dez/2021</span>
+      </div>
+      <p class="role-org">OM30 · São Paulo, Brasil</p>
+      <ul class="bullets">
+        <li>Levantamento e documentação de requisitos de negócio para implantação de sistemas nas áreas de Saúde Pública e Educação Pública, com uso de metodologias ágeis.</li>
+        <li>Participação ativa na implantação, capacitação de usuários e entrega do sistema in loco nos clientes, garantindo aderência às necessidades do negócio.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Experiência Anterior</h2>
+
+    <div class="role">
+      <div class="role-row">
+        <span class="role-title">Gerente de Contas, Marsan Sistemas (Automação Comercial)</span>
+        <span class="role-dates">mar/2009 – jul/2013</span>
+      </div>
+      <p class="role-org">Jundiaí-SP</p>
+      <ul class="bullets">
+        <li>Coordenação de equipe técnica em projetos de Gestão de Varejo, identificando necessidades do cliente e propondo novos processos; responsável pela análise de qualidade de software e serviços, treinamento de clientes e documentação técnica.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-row">
+        <span class="role-title">Gerente de Contas, Rentech/Bematech</span>
+        <span class="role-dates">jan/2002 – jan/2009</span>
+      </div>
+      <p class="role-org">Jundiaí-SP</p>
+      <ul class="bullets">
+        <li>Coordenação de equipe técnica em projetos de Gestão de Varejo, com identificação de necessidades do cliente, apoio à implantação de soluções de automação comercial e treinamento de usuários.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Competências Técnicas</h2>
+    <div class="chips">
+      <span class="chip">SQL</span>
+      <span class="chip">Power BI (Especialista)</span>
+      <span class="chip">Data Warehouse</span>
+      <span class="chip">Data Lakehouse</span>
+      <span class="chip">Otimização de Consultas</span>
+      <span class="chip">KPIs &amp; Dashboards</span>
+      <span class="chip">Inteligência Artificial aplicada a Dados</span>
+      <span class="chip">Metodologias Ágeis (Scrum)</span>
+      <span class="chip">IA Generativa (Claude) via MCP com Power BI</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Certificações</h2>
+    <div class="chips">
+      <span class="chip">Power BI, Especialista</span>
+      <span class="chip">IA para Análise de Dados</span>
+      <span class="chip">Data Warehouse Week</span>
+      <span class="chip">Liderança na Era das Competências</span>
+      <span class="chip">Imersão, Liderança de Alto Impacto</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Idiomas</h2>
+    <p class="lang">Inglês, Intermediário</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Formação Acadêmica</h2>
+    <div class="edu">
+      <div class="edu-school">Fundação Getulio Vargas (FGV)</div>
+      <div class="edu-detail">MBA em Tecnologia da Informação aplicada à Gestão Estratégica de Negócios · 2005 – 2006</div>
+    </div>
+    <div class="edu">
+      <div class="edu-school">Centro Universitário Fundação Santo André</div>
+      <div class="edu-detail">Bacharelado em Matemática, ênfase em Análise de Sistemas · 1988 – 1992</div>
+    </div>
+  </section>
+
+  <footer>Currículo digital · atualizado em setembro de 2026</footer>
+
+</div>
+</body>
+</html>
